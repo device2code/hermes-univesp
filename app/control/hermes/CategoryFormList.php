@@ -1,9 +1,9 @@
 <?php
 /**
- * StatusFormList Form List
+ * CategoryFormList Form List
  * @author  André C. Scherrer
  */
-class StatusFormList extends TPage
+class CategoryFormList extends TPage
 {
     protected $form; // form
     protected $datagrid; // datagrid
@@ -18,8 +18,8 @@ class StatusFormList extends TPage
     {
         parent::__construct();
                 
-        $this->form = new BootstrapFormBuilder('form_Status');
-        $this->form->setFormTitle('Status');
+        $this->form = new BootstrapFormBuilder('form_Category');
+        $this->form->setFormTitle('Categorias');
         
         // create the form fields
         $id = new TEntry('id');
@@ -39,7 +39,7 @@ class StatusFormList extends TPage
         {
             $id->setEditable(FALSE);
         }
-        
+               
         // create the form actions
         $btn = $this->form->addAction(_t('Save'), new TAction([$this, 'onSave']), 'fa:save');
         $btn->class = 'btn btn-sm btn-primary';
@@ -47,8 +47,10 @@ class StatusFormList extends TPage
         
         // creates a Datagrid
         $this->datagrid = new BootstrapDatagridWrapper(new TDataGrid);
-        $this->datagrid->style = 'width: 100%';       
-
+        $this->datagrid->style = 'width: 100%';
+        // $this->datagrid->datatable = 'true';
+        // $this->datagrid->enablePopover('Popover', 'Hi <b> {name} </b>');
+        
         // creates the datagrid columns
         $column_id = new TDataGridColumn('id', 'ID', 'left', '10%');
         $column_name = new TDataGridColumn('name', 'Nome', 'left', '90%');
@@ -104,8 +106,8 @@ class StatusFormList extends TPage
             // open a transaction with database 'hermes'
             TTransaction::open('hermes');
             
-            // creates a repository for Status
-            $repository = new TRepository('Status');
+            // creates a repository for Category
+            $repository = new TRepository('Category');
             $limit = 10;
             // creates a criteria
             $criteria = new TCriteria;
@@ -113,7 +115,7 @@ class StatusFormList extends TPage
             // default order
             if (empty($param['order']))
             {
-                $param['order'] = 'id';
+                $param['order'] = 'name';
                 $param['direction'] = 'asc';
             }
             $criteria->setProperties($param); // order, offset
@@ -178,7 +180,7 @@ class StatusFormList extends TPage
         {
             $key = $param['key']; // get the parameter $key
             TTransaction::open('hermes'); // open a transaction with database
-            $object = new Status($key, FALSE); // instantiates the Active Record
+            $object = new Category($key, FALSE); // instantiates the Active Record
             $object->delete(); // deletes the object from the database
             TTransaction::close(); // close the transaction
             
@@ -211,7 +213,7 @@ class StatusFormList extends TPage
             $this->form->validate(); // validate form data
             $data = $this->form->getData(); // get form data as array
             
-            $object = new Status;  // create an empty object
+            $object = new Category;  // create an empty object
             $object->fromArray( (array) $data); // load the object with data
             $object->store(); // save the object
             
@@ -253,7 +255,7 @@ class StatusFormList extends TPage
             {
                 $key = $param['key'];  // get the parameter $key
                 TTransaction::open('hermes'); // open a transaction
-                $object = new Status($key); // instantiates the Active Record
+                $object = new Category($key); // instantiates the Active Record
                 $this->form->setData($object); // fill the form
                 TTransaction::close(); // close the transaction
             }

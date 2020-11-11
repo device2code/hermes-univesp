@@ -3,6 +3,10 @@
   <menuitem label="Auxiliares">
     <icon>fas:cogs fa-fw</icon>
     <menu>
+      <menuitem label="Categorias">
+        <action>CategoryFormList</action>
+        <icon>fas:circle fa-fw</icon>
+      </menuitem>
       <menuitem label="Status">
         <action>StatusFormList</action>
         <icon>fas:circle fa-fw</icon>
