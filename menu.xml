@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu>
+  <menuitem label="Auxiliares">
+    <icon>fas:cogs fa-fw</icon>
+    <menu>
+      <menuitem label="Status">
+        <action>StatusFormList</action>
+        <icon>fas:circle fa-fw</icon>
+      </menuitem>
+    </menu>
+  </menuitem>
   <menuitem label="_t{Administration}">
     <icon>fas:home fa-fw</icon>
     <menu>
